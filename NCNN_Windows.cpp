@@ -7,5 +7,7 @@ using namespace std;
 
 int main()
 {
+	ncnn::Net net;
+	
 	cout << "Successfully completed compile!" << endl;
 }

@@ -2,7 +2,6 @@
 // 或项目特定的包含文件。
 
 #include <iostream>
-#include <opencv2/opencv.hpp>
 #include <map>
 #include <vector>  
 #include <algorithm>  
@@ -11,4 +10,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <opencv2/opencv.hpp>
 #include <net.h>
