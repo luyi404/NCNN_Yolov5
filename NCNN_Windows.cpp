@@ -37,7 +37,6 @@ int main(int argc, char** argv)
 
     yolov5::draw_objects(m, objects); 
 
-    cout << "Successfully completed compile!" << endl;
     system("pause");
 
     return 0;

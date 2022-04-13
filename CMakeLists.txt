@@ -3,21 +3,44 @@
 project ("NCNN_Windows")
 
 set(ncnn_DIR "D:\\ncnn\\ncnn\\build\\install\\lib\\cmake\\ncnn" CACHE PATH "Directory that contains ncnnConfig.cmake")
+set(opencv_DIR "D:\\ncnn\\opencv2\\opencv")
+#[[
+	The opencv_DIR's folder architecture like:
+opencv
+├── build
+│   ├── bin
+│   ├── etc
+│   ├── include
+│   ├── java
+│   ├── python
+│   └── x64
+└── sources
+    ├── 3rdparty
+    ├── apps
+    ├── cmake
+    ├── data
+    ├── doc
+    ├── include
+    ├── modules
+    ├── platforms
+    └── samples
+]]#
+
 find_package(ncnn REQUIRED)
 
 include_directories(
-        "D:\\ncnn\\opencv2\\opencv\\build\\include",
-		"D:\\ncnn\\opencv2\\opencv\\build\\include\\opencv2\\opencv",
-		"D:\\ncnn\\opencv2\\opencv\\sources\\3rdparty\\include"
+		"${opencv_DIR}/build/include",
+		"${opencv_DIR}/sources/3rdparty/include",
+		"${opencv_DIR}/build/include/opencv2/opencv"
 )
 
 link_directories(
-		"D:\\ncnn\\opencv2\\opencv\\build\\x64\\vc15\\lib"
+		"${opencv_DIR}/build/x64/vc15/lib"
 )
 
 
-set(OpenCV_INCLUDE_DIRS "D:\\ncnn\\opencv2\\opencv\\build\\include" CACHE PATH "Directory that contains OpenCV headers")
-set(OpenCV_LIBS "D:\\ncnn\\opencv2\\opencv\\build\\x64\\vc15\\lib\\opencv_world455.lib" CACHE PATH "Directory that contains OpenCV libraries")
+set(OpenCV_INCLUDE_DIRS "${opencv_DIR}/build/include" CACHE PATH "Directory that contains OpenCV headers")
+set(OpenCV_LIBS "${opencv_DIR}/build/x64/vc15/lib/opencv_world455.lib" CACHE PATH "Directory that contains OpenCV libraries")
 
 
 link_libraries(
