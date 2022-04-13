@@ -2,6 +2,18 @@
 
 模型转换工具： https://convertmodel.com/#outputFormat=ncnn
 
+# 编译过程
+## Windows下
+**首先把CMAKE里面的库的地址换成本机的，然后修改NCNN_Windows.cpp的main函数里面的各种路径**
+
+然后
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build . --target ALL_BUILD --config Release
+```
+
 # 编译错误
 
 ## 检测到"_ITERATOR_DEBUG_LEVEL"的不匹配项的解决方案
