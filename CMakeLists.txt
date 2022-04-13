@@ -15,11 +15,17 @@ link_directories(
 		"D:\\ncnn\\opencv2\\opencv\\build\\x64\\vc15\\lib"
 )
 
-add_executable (NCNN_Windows "NCNN_Windows.cpp" "NCNN_Windows.h"  "ncnn_yolov5.hpp")
-
 
 set(OpenCV_INCLUDE_DIRS "D:\\ncnn\\opencv2\\opencv\\build\\include" CACHE PATH "Directory that contains OpenCV headers")
 set(OpenCV_LIBS "D:\\ncnn\\opencv2\\opencv\\build\\x64\\vc15\\lib\\opencv_world455.lib" CACHE PATH "Directory that contains OpenCV libraries")
+
+
+link_libraries(
+	${OpenCV_LIBS}
+)
+
+add_executable (NCNN_Windows "NCNN_Windows.cpp" "NCNN_Windows.h"  "ncnn_yolov5.hpp")
+
 
 target_include_directories(NCNN_Windows PRIVATE ${OpenCV_INCLUDE_DIRS})
 

@@ -16,10 +16,11 @@ int main(int argc, char** argv)
     }
     */
     //const char* imagepath = argv[1];
-    const char* imagepath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\test2.png";
+    const char* imagepath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\20190810_8256.jpg";
 	
-
+    
     cv::Mat m = cv::imread(imagepath, 1);
+    
     if (m.empty())
     {
         fprintf(stderr, "cv::imread %s failed\n", imagepath);
@@ -34,7 +35,7 @@ int main(int argc, char** argv)
 	
     yolov5::detect_yolov5(parapath, binpath, m, objects);
 
-    yolov5::draw_objects(m, objects);
+    yolov5::draw_objects(m, objects); 
 
     cout << "Successfully completed compile!" << endl;
     system("pause");

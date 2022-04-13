@@ -196,7 +196,7 @@ namespace yolov5 {
 		ncnn::Net yolov5;
 
 		yolov5.opt.use_vulkan_compute = true;
-		// yolov5.opt.use_bf16_storage = true;
+		//yolov5.opt.use_bf16_storage = true;
 
 		// original pretrained model from https://github.com/ultralytics/yolov5
 		// the ncnn model https://github.com/nihui/ncnn-assets/tree/master/models
@@ -206,7 +206,7 @@ namespace yolov5 {
 
 
 		const int target_size = 320;
-		const float prob_threshold = 0.3f;
+		const float prob_threshold = 0.4f;
 		const float nms_threshold = 0.5f;
 
 		int img_w = bgr.cols;
@@ -216,6 +216,7 @@ namespace yolov5 {
 		int w = img_w;
 		int h = img_h;
 		float scale = 1.f;
+		/*
 		if (w > h)
 		{
 			scale = (float)target_size / w;
@@ -228,6 +229,11 @@ namespace yolov5 {
 			h = target_size;
 			w = w * scale;
 		}
+		*/
+
+		float scale_w = (float)target_size / w;
+		float scale_h = (float)target_size / h;
+		w = h = target_size;
 
 		ncnn::Mat in = ncnn::Mat::from_pixels_resize(bgr.data, ncnn::Mat::PIXEL_BGR2RGB, img_w, img_h, w, h);
 
@@ -240,6 +246,9 @@ namespace yolov5 {
 
 		const float norm_vals[3] = { 1 / 255.f, 1 / 255.f, 1 / 255.f };
 		in_pad.substract_mean_normalize(0, norm_vals);
+		
+		std::cout << "After preprocess: " << in_pad.c << " " << in_pad.w << " " << in_pad.h << std::endl;
+		
 
 		ncnn::Extractor ex = yolov5.create_extractor();
 
@@ -321,10 +330,10 @@ namespace yolov5 {
 			objects[i] = proposals[picked[i]];
 
 			// adjust offset to original unpadded
-			float x0 = (objects[i].rect.x - (wpad / 2)) / scale;
-			float y0 = (objects[i].rect.y - (hpad / 2)) / scale;
-			float x1 = (objects[i].rect.x + objects[i].rect.width - (wpad / 2)) / scale;
-			float y1 = (objects[i].rect.y + objects[i].rect.height - (hpad / 2)) / scale;
+			float x0 = (objects[i].rect.x - (wpad / 2)) / scale_w;
+			float y0 = (objects[i].rect.y - (hpad / 2)) / scale_h;
+			float x1 = (objects[i].rect.x + objects[i].rect.width - (wpad / 2)) / scale_w;
+			float y1 = (objects[i].rect.y + objects[i].rect.height - (hpad / 2)) / scale_h;
 
 			// clip
 			x0 = std::max(std::min(x0, (float)(img_w - 1)), 0.f);
@@ -344,7 +353,7 @@ namespace yolov5 {
 	static void draw_objects(const cv::Mat& bgr, const std::vector<Object>& objects)
 	{
 		static const char* class_names[] = {
-			"class1", "class2", "class3", "class4", "class5"
+			"bj_bpmh","bj_bpps","bj_wkps","hxq_gjtps","hxq_yfyc"
 		};
 
 		cv::Mat image = bgr.clone();
@@ -362,7 +371,7 @@ namespace yolov5 {
 			sprintf(text, "%s %.1f%%", class_names[obj.label], obj.prob * 100);
 
 			int baseLine = 0;
-			cv::Size label_size = cv::getTextSize(text, cv::FONT_HERSHEY_PLAIN, 0.5, 1, &baseLine);
+			cv::Size label_size = cv::getTextSize(text, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);
 
 			int x = obj.rect.x;
 			int y = obj.rect.y - label_size.height - baseLine;
@@ -377,9 +386,12 @@ namespace yolov5 {
 			cv::putText(image, text, cv::Point(x, y + label_size.height),
 				cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
 		}
-		std::cout << "Show Result" << std::endl;
+		
+		//cv::imwrite("ncnn_images.png", image);
 		cv::imshow("image", image);
+
 		cv::waitKey(0);
+		cv::destroyAllWindows();
 	}
 
 }
