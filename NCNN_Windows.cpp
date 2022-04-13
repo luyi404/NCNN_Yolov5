@@ -31,13 +31,11 @@ int main(int argc, char** argv)
 
     const char* parapath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\quexianyolov5.param";
     const char* binpath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\quexianyolov5.bin";
-    
 	
     yolov5::detect_yolov5(parapath, binpath, m, objects);
 
     yolov5::draw_objects(m, objects); 
 
-    cout << "Successfully completed compile!" << endl;
     system("pause");
 
     return 0;
