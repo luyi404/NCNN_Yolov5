@@ -18,6 +18,24 @@ cmake --build . --target ALL_BUILD --config Release
 ```
 yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
 ```
+## 量化
+在校验数据集目录（images目录）的前一个目录下，先获取图片的地址，然后使用ncnn2table.ext
+```bash
+find images/ -type f > imagelist.txt
+./ncnn2table.exe quexianyolov5.param quexianyolov5.bin imagelist.txt quexianyolov5.table mean=[104,117,123] norm=[0.017,0.017,0.017] shape=[320,320,3] pixel=BGR thread=8 method=kl
+./ncnn2int8.exe quexianyolov5.param quexianyolov5.bin quexianyolov5-int8.param quexianyolov5-int8.bin quexianyolov5.table
+```
+
+然后就生成了`quexianyolov5-int8.bin`和`quexianyolov5-int8.param`文件。
+### 是否使用量化
+1. 在加载的模型文件用量化后的模型文件
+2. `ncnn_yolov5.hpp`文件顶上的 `#define USE_INT8` 控制是否使用INT8模型
+
+### ncnn2table:
+![](https://s2.loli.net/2022/04/14/4v8sTcVMwa2J3It.png)
+### ncnn2int8:
+![](https://s2.loli.net/2022/04/14/gwdot5FXaiUOKy6.png)
+
 
 # 编译错误
 

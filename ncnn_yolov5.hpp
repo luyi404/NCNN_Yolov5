@@ -2,6 +2,7 @@
 
 
 #define MAX_STRIDE 32
+#define USE_INT8
 
 namespace yolov5 {
 	
@@ -195,7 +196,7 @@ namespace yolov5 {
 	{
 		ncnn::Net yolov5;
 
-		//yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
+		yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
 		
 		
 		//yolov5.opt.use_bf16_storage = true;
@@ -210,6 +211,10 @@ namespace yolov5 {
 		yolov5.load_param(param_path);
 		yolov5.load_model(bin_path);
 
+#ifdef USE_INT8
+		yolov5.opt.num_threads = 8;
+		yolov5.opt.use_int8_inference = true;
+#endif
 
 		const int target_size = 320;
 		const float prob_threshold = 0.4f;
