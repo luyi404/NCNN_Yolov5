@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     }
     */
     //const char* imagepath = argv[1];
-    const char* imagepath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\20190810_8256.jpg";
+    const char* imagepath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\20200108_503.jpg";
 	
     
     cv::Mat m = cv::imread(imagepath, 1);

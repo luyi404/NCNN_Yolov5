@@ -13,6 +13,11 @@ cd build
 cmake ..
 cmake --build . --target ALL_BUILD --config Release
 ```
+## 控制是否使用gpu
+在文件`ncnn_yolov5.cpp`中的`detect_yolov5`函数中
+```
+yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
+```
 
 # 编译错误
 
