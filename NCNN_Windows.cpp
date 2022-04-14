@@ -31,6 +31,9 @@ int main(int argc, char** argv)
 
     const char* parapath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\quexianyolov5-int8.param";
     const char* binpath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\quexianyolov5-int8.bin";
+
+    //const char* parapath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\quexianyolov5.param";
+    //const char* binpath = "D:\\ncnn\\NCNN_Windows\\NCNN_Windows\\quexianyolov5\\quexianyolov5.bin";
 	
     yolov5::detect_yolov5(parapath, binpath, m, objects);
 

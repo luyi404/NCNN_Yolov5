@@ -196,14 +196,8 @@ namespace yolov5 {
 	{
 		ncnn::Net yolov5;
 
-		yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
-		
-		
-		//yolov5.opt.use_bf16_storage = true;
-		
-		/*yolov5.opt.use_int8_inference = true;
-		yolov5.opt.use_image_storage = true;
-		yolov5.opt.use_int8_arithmetic = true;*/
+		// yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
+
 
 		// original pretrained model from https://github.com/ultralytics/yolov5
 		// the ncnn model https://github.com/nihui/ncnn-assets/tree/master/models

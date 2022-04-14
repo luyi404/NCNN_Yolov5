@@ -13,6 +13,13 @@ cd build
 cmake ..
 cmake --build . --target ALL_BUILD --config Release
 ```
+
+### 运行结果
+#### With GPU:
+![with GPU](https://s2.loli.net/2022/04/14/qnwDbg9EiIS4Tcj.png)
+#### With CPU:
+![with CPU](https://s2.loli.net/2022/04/14/cBMvQRzUn3PSjdC.png)
+
 ## 控制是否使用gpu
 在文件`ncnn_yolov5.cpp`中的`detect_yolov5`函数中
 ```
@@ -31,10 +38,11 @@ find images/ -type f > imagelist.txt
 1. 在加载的模型文件用量化后的模型文件
 2. `ncnn_yolov5.hpp`文件顶上的 `#define USE_INT8` 控制是否使用INT8模型
 
-### ncnn2table:
-![](https://s2.loli.net/2022/04/14/4v8sTcVMwa2J3It.png)
-### ncnn2int8:
-![](https://s2.loli.net/2022/04/14/gwdot5FXaiUOKy6.png)
+### 量化后的运行结果
+#### With GPU
+![](https://s2.loli.net/2022/04/14/oJ6LZHr8QKlS1PI.png)
+#### With CPU
+![](https://s2.loli.net/2022/04/14/c3OaYlMVF6Pwnr9.png)
 
 
 # 编译错误
