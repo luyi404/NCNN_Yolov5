@@ -196,7 +196,7 @@ namespace yolov5 {
 	{
 		ncnn::Net yolov5;
 
-		// yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
+		yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
 
 
 		// original pretrained model from https://github.com/ultralytics/yolov5
@@ -392,10 +392,10 @@ namespace yolov5 {
 				cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
 		}
 		
-		//cv::imwrite("ncnn_images.png", image);
-		cv::imshow("image", image);
+		cv::imwrite("ncnn_images.png", image);
+		//cv::imshow("image", image);
 
-		cv::waitKey(0);
+		//cv::waitKey(0);
 		//cv::destroyAllWindows();
 	}
 

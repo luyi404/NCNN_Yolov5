@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 
     yolov5::draw_objects(m, objects); 
 
-    system("pause");
+    //system("pause");
 
     return 0;
 }

@@ -1,9 +1,8 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
 project ("NCNN_Windows")
-
-set(ncnn_DIR "D:\\ncnn\\ncnn\\build\\install\\lib\\cmake\\ncnn" CACHE PATH "Directory that contains ncnnConfig.cmake")
-set(opencv_DIR "D:\\ncnn\\opencv2\\opencv")
+set(ncnn_DIR "/home/yaoyuh/ncnn/build/install/lib/cmake/ncnn" CACHE PATH "Directory that contains ncnnConfig.cmake")
+find_package(OpenCV REQUIRED)
 #[[
 	The opencv_DIR's folder architecture like:
 opencv
@@ -28,20 +27,11 @@ opencv
 
 find_package(ncnn REQUIRED)
 
-include_directories(
-		"${opencv_DIR}/build/include",
-		"${opencv_DIR}/sources/3rdparty/include",
-		"${opencv_DIR}/build/include/opencv2/opencv"
-)
-
-link_directories(
-		"${opencv_DIR}/build/x64/vc15/lib"
-)
-
-
-set(OpenCV_INCLUDE_DIRS "${opencv_DIR}/build/include" CACHE PATH "Directory that contains OpenCV headers")
-set(OpenCV_LIBS "${opencv_DIR}/build/x64/vc15/lib/opencv_world455.lib" CACHE PATH "Directory that contains OpenCV libraries")
-
+include_directories(${OpenCV_INCLUDE_DIRS}) 
+message(STATUS "Opnecv ;ibrary status: ")
+message(STATUS "> version: ${OpenCV_VERSION} ")
+message(STATUS "libraries: ${OpenCV_LIBS} ")
+message(STATUS "> include: ${OpenCV_INCLUDE_DIRS}  ")
 
 link_libraries(
 	${OpenCV_LIBS}
