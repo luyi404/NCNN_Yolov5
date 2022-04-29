@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
 project ("NCNN_Windows")
-set(ncnn_DIR "/home/yaoyuh/ncnn/build/install/lib/cmake/ncnn" CACHE PATH "Directory that contains ncnnConfig.cmake")
+#set(ncnn_DIR "/home/yaoyuh/ncnn/build/install/lib/cmake/ncnn" CACHE PATH "Directory that contains ncnnConfig.cmake")
 find_package(OpenCV REQUIRED)
 #[[
 	The opencv_DIR's folder architecture like:

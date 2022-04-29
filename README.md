@@ -1,4 +1,4 @@
-# NCNN_Windows
+# NCNN yolov5
 
 模型转换工具： https://convertmodel.com/#outputFormat=ncnn
 
@@ -14,13 +14,37 @@ cmake ..
 cmake --build . --target ALL_BUILD --config Release
 ```
 
+##  Linux下编译
+
+**切换到项目linux分支**
+
+如果NCNN和OPENCV都已经 `make install` 过的话，可以直接
+
+```bash
+mkdir build
+cd build
+
+# 需要将quexianyolov5文件夹下的模型参数与结构文件(.param和.bin)拷贝到build文件夹中
+
+cmake ..
+make
+```
+
+
+
 ### 运行结果
+
 #### With GPU:
 ![with GPU](https://s2.loli.net/2022/04/14/qnwDbg9EiIS4Tcj.png)
 #### With CPU:
 ![with CPU](https://s2.loli.net/2022/04/14/cBMvQRzUn3PSjdC.png)
 
+
+
+
+
 ## 控制是否使用gpu
+
 在文件`ncnn_yolov5.cpp`中的`detect_yolov5`函数中
 ```
 yolov5.opt.use_vulkan_compute = true; //这一行控制是否使用gpu
