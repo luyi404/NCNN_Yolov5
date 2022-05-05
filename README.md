@@ -1,12 +1,12 @@
-# NCNN_Windows
+# NCNN yolov5
 
-Ä£ĞÍ×ª»»¹¤¾ß£º https://convertmodel.com/#outputFormat=ncnn
+æ¨¡å‹è½¬æ¢å·¥å…·ï¼š https://convertmodel.com/#outputFormat=ncnn
 
-# ±àÒë¹ı³Ì
-## WindowsÏÂ
-**Ê×ÏÈ°ÑCMAKEÀïÃæµÄ¿âµÄµØÖ·»»³É±¾»úµÄ£¬È»ºóĞŞ¸ÄNCNN_Windows.cppµÄmainº¯ÊıÀïÃæµÄ¸÷ÖÖÂ·¾¶**
+# ç¼–è¯‘è¿‡ç¨‹
+## Windowsä¸‹
+**é¦–å…ˆæŠŠCMAKEé‡Œé¢çš„åº“çš„åœ°å€æ¢æˆæœ¬æœºçš„ï¼Œç„¶åä¿®æ”¹NCNN_Windows.cppçš„mainå‡½æ•°é‡Œé¢çš„å„ç§è·¯å¾„**
 
-È»ºó
+ç„¶å
 ```bash
 mkdir build
 cd build
@@ -14,50 +14,74 @@ cmake ..
 cmake --build . --target ALL_BUILD --config Release
 ```
 
-### ÔËĞĞ½á¹û
+##  Linuxä¸‹ç¼–è¯‘
+
+**åˆ‡æ¢åˆ°é¡¹ç›®linuxåˆ†æ”¯**
+
+å¦‚æœNCNNå’ŒOPENCVéƒ½å·²ç» `make install` è¿‡çš„è¯ï¼Œå¯ä»¥ç›´æ¥
+
+```bash
+mkdir build
+cd build
+
+# éœ€è¦å°†quexianyolov5æ–‡ä»¶å¤¹ä¸‹çš„æ¨¡å‹å‚æ•°ä¸ç»“æ„æ–‡ä»¶(.paramå’Œ.bin)æ‹·è´åˆ°buildæ–‡ä»¶å¤¹ä¸­
+
+cmake ..
+make
+```
+
+
+
+### è¿è¡Œç»“æœ
+
 #### With GPU:
 ![with GPU](https://s2.loli.net/2022/04/14/qnwDbg9EiIS4Tcj.png)
 #### With CPU:
 ![with CPU](https://s2.loli.net/2022/04/14/cBMvQRzUn3PSjdC.png)
 
-## ¿ØÖÆÊÇ·ñÊ¹ÓÃgpu
-ÔÚÎÄ¼ş`ncnn_yolov5.cpp`ÖĞµÄ`detect_yolov5`º¯ÊıÖĞ
+
+
+
+
+## æ§åˆ¶æ˜¯å¦ä½¿ç”¨gpu
+
+åœ¨æ–‡ä»¶`ncnn_yolov5.cpp`ä¸­çš„`detect_yolov5`å‡½æ•°ä¸­
 ```
-yolov5.opt.use_vulkan_compute = true; //ÕâÒ»ĞĞ¿ØÖÆÊÇ·ñÊ¹ÓÃgpu
+yolov5.opt.use_vulkan_compute = true; //è¿™ä¸€è¡Œæ§åˆ¶æ˜¯å¦ä½¿ç”¨gpu
 ```
-## Á¿»¯
-ÔÚĞ£ÑéÊı¾İ¼¯Ä¿Â¼£¨imagesÄ¿Â¼£©µÄÇ°Ò»¸öÄ¿Â¼ÏÂ£¬ÏÈ»ñÈ¡Í¼Æ¬µÄµØÖ·£¬È»ºóÊ¹ÓÃncnn2table.ext
+## é‡åŒ–
+åœ¨æ ¡éªŒæ•°æ®é›†ç›®å½•ï¼ˆimagesç›®å½•ï¼‰çš„å‰ä¸€ä¸ªç›®å½•ä¸‹ï¼Œå…ˆè·å–å›¾ç‰‡çš„åœ°å€ï¼Œç„¶åä½¿ç”¨ncnn2table.ext
 ```bash
 find images/ -type f > imagelist.txt
 ./ncnn2table.exe quexianyolov5.param quexianyolov5.bin imagelist.txt quexianyolov5.table mean=[104,117,123] norm=[0.017,0.017,0.017] shape=[320,320,3] pixel=BGR thread=8 method=kl
 ./ncnn2int8.exe quexianyolov5.param quexianyolov5.bin quexianyolov5-int8.param quexianyolov5-int8.bin quexianyolov5.table
 ```
 
-È»ºó¾ÍÉú³ÉÁË`quexianyolov5-int8.bin`ºÍ`quexianyolov5-int8.param`ÎÄ¼ş¡£
-### ÊÇ·ñÊ¹ÓÃÁ¿»¯
-1. ÔÚ¼ÓÔØµÄÄ£ĞÍÎÄ¼şÓÃÁ¿»¯ºóµÄÄ£ĞÍÎÄ¼ş
-2. `ncnn_yolov5.hpp`ÎÄ¼ş¶¥ÉÏµÄ `#define USE_INT8` ¿ØÖÆÊÇ·ñÊ¹ÓÃINT8Ä£ĞÍ
+ç„¶åå°±ç”Ÿæˆäº†`quexianyolov5-int8.bin`å’Œ`quexianyolov5-int8.param`æ–‡ä»¶ã€‚
+### æ˜¯å¦ä½¿ç”¨é‡åŒ–
+1. åœ¨åŠ è½½çš„æ¨¡å‹æ–‡ä»¶ç”¨é‡åŒ–åçš„æ¨¡å‹æ–‡ä»¶
+2. `ncnn_yolov5.hpp`æ–‡ä»¶é¡¶ä¸Šçš„ `#define USE_INT8` æ§åˆ¶æ˜¯å¦ä½¿ç”¨INT8æ¨¡å‹
 
-### Á¿»¯ºóµÄÔËĞĞ½á¹û
+### é‡åŒ–åçš„è¿è¡Œç»“æœ
 #### With GPU
 ![](https://s2.loli.net/2022/04/14/oJ6LZHr8QKlS1PI.png)
 #### With CPU
 ![](https://s2.loli.net/2022/04/14/c3OaYlMVF6Pwnr9.png)
 
 
-# ±àÒë´íÎó
+# ç¼–è¯‘é”™è¯¯
 
-## ¼ì²âµ½"_ITERATOR_DEBUG_LEVEL"µÄ²»Æ¥ÅäÏîµÄ½â¾ö·½°¸
-Èç¹ûÊÇÓÃVSÀ´±àÒëÔËĞĞ£¬ĞèÒªÊ¹ÓÃX64 Release£¬²»ÄÜÓÃDEBUG£¬ÒòÎªÎÒNCNNÊÇ±àÒëµÄRelease°æ±¾¡£Èç¹ûÏëÒªÓÃDebugµÄ»°£º
-### µÚÒ»ÖÖ£º°Ñµ±Ç°ÅÜncnnµÄ¹¤³ÌÀï£¬Debug¸Ä³ÉRelWithDebInfo
+## æ£€æµ‹åˆ°"_ITERATOR_DEBUG_LEVEL"çš„ä¸åŒ¹é…é¡¹çš„è§£å†³æ–¹æ¡ˆ
+å¦‚æœæ˜¯ç”¨VSæ¥ç¼–è¯‘è¿è¡Œï¼Œéœ€è¦ä½¿ç”¨X64 Releaseï¼Œä¸èƒ½ç”¨DEBUGï¼Œå› ä¸ºæˆ‘NCNNæ˜¯ç¼–è¯‘çš„Releaseç‰ˆæœ¬ã€‚å¦‚æœæƒ³è¦ç”¨Debugçš„è¯ï¼š
+### ç¬¬ä¸€ç§ï¼šæŠŠå½“å‰è·‘ncnnçš„å·¥ç¨‹é‡Œï¼ŒDebugæ”¹æˆRelWithDebInfo
 ![](https://s2.loli.net/2022/04/08/qCmGkg3yQUpjVMz.png)
 
-È»ºó¾Í¿ÉÒÔÉè¶Ïµã¡¢µ÷ÊÔÔËĞĞÁË
+ç„¶åå°±å¯ä»¥è®¾æ–­ç‚¹ã€è°ƒè¯•è¿è¡Œäº†
 
-### µÚ¶şÖÖ·½Ê½
-×ÔĞĞ±àÒë£¬²¢ÇÒ±àÒëÊ±Ö¸¶¨ -DCMAKE_BUILD_TYPE=Debug¡£
+### ç¬¬äºŒç§æ–¹å¼
+è‡ªè¡Œç¼–è¯‘ï¼Œå¹¶ä¸”ç¼–è¯‘æ—¶æŒ‡å®š -DCMAKE_BUILD_TYPE=Debugã€‚
 
-¶øÈç¹û±àÒëncnnÊ±±àÒëÁËtools£¬ÄÇÃ´ĞèÒªprotobuf£¬¾ÍĞèÒªprotobufÒ²Ìá¹©ÁËdebug°æ±¾µÄ¿â¡£
+è€Œå¦‚æœç¼–è¯‘ncnnæ—¶ç¼–è¯‘äº†toolsï¼Œé‚£ä¹ˆéœ€è¦protobufï¼Œå°±éœ€è¦protobufä¹Ÿæä¾›äº†debugç‰ˆæœ¬çš„åº“ã€‚
 
-¶øÈç¹ûÄãµÄ¹¤³ÌÖĞÓÃµ½ÁËOpenCV£¬OpenCVÒ²ĞèÒªDebug°æ±¾µÄ¡£
-ÏêÇé¼û https://github.com/Tencent/ncnn/issues/2500
+è€Œå¦‚æœä½ çš„å·¥ç¨‹ä¸­ç”¨åˆ°äº†OpenCVï¼ŒOpenCVä¹Ÿéœ€è¦Debugç‰ˆæœ¬çš„ã€‚
+è¯¦æƒ…è§ https://github.com/Tencent/ncnn/issues/2500
