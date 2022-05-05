@@ -2,7 +2,9 @@
 
 模型转换工具： https://convertmodel.com/#outputFormat=ncnn
 
-# 编译过程
+NCNN 编译： https://github.com/Tencent/ncnn/wiki/how-to-build
+
+# Yolov5 in NCNN的编译过程
 ## Windows下
 **首先把CMAKE里面的库的地址换成本机的，然后修改NCNN_Windows.cpp的main函数里面的各种路径**
 
